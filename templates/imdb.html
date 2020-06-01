@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Sentiment App</title>
+  </head>
+  <body class="bg-nav" style="background-image: url('https://camo.githubusercontent.com/c225d6e71818c0cd7d75a78fe921d3f2800d94ed/68747470733a2f2f7261772e6769746875622e636f6d2f67676f646f6e652d6d6172657363612f4a532d416e696d617465642d427562626c65732d4261636b67726f756e642f6d61737465722f73637265656e73686f742e706e67');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;">
+   <nav class="navbar bg-nav">
+       <a href="" class="navbar-brand text-light">Movie Sentiment App</a>
+   </nav>>
+   <h1 class="text-light display-2 mt-200" style="text-align:center;margin: 25px 50px 75px 50px;font-weight:bold;color: white;
+  text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue">IMDB Movie Reviews Sentiment</h1>
+
+    <form class="form" action="/predict" method="POST">
+        <input type="text" name='movie-title' class="form-control" id="movie-title" placeholder="Enter Movie Title" value="" required=""><br><br>
+        <button class="btn btn-primary btn-lg" style="margin-left:48%" type="submit">search</button>
+    </form>
+    <hr style="border-style: none;border-top-style: dotted;border-color: grey;border-width: 5px;width: 5%;padding: 5%">
+    <h2 style="text-align:center;font-weight:bold">The Search results for : {{ movie_name}} </h2>
+
+   <div class="movie-table" style="text-align:center; padding: 1%">
+
+        {% if size>0 %}
+        <h3 style="font-weight:bold;padding:1%;font-size:60px">Search Reasult </h3>
+        <table border="2" align="center">
+              <tbody>
+              <tr>
+                <th style="padding:20px;font-size:40px">TITLE</th>
+                <th style="padding:20px;font-size:20px">IMDB-ID</th>
+              </tr>
+              {% for i in range (size) %}
+                        <tr>
+                            <form action="/prediction" method="POST">
+
+                                <td style="padding:20px">
+                                    {{ df['movie_names'].iloc[i] }}
+                                </td>
+                                <td style="padding:20px">
+                                    <button class="btn" style="font-weight:bold" name="movie-id" type="submit" value="{{ df['movie_id'].iloc[i] }}">{{ df['movie_id'].iloc[i] }}</button>
+                                </td>
+
+                            </form>
+                        </tr>
+               {% endfor %}
+              </tbody>
+        </table>
+
+        {% else %}
+                    <div class="content" style="text-align:center;font-weight:bold;font-size:30px">
+                        <p>SORRY!</p>
+                        <p>Search for something else</p><br>
+
+        {% endif %}
+
+    </div>
+
+    <hr style="border-style: none;border-top-style: dotted;border-color: grey;border-width: 5px;width: 5%;padding: 5%">
+  <br><br>
+  <footer id="footer" style="text-align:center;padding:2%">
+
+    <strong>© Copyright 2020</strong>
+      <span class="grey">|</span>
+      <span>Tuhin Mukherjee</span>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
